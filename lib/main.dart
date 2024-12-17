@@ -201,9 +201,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   shape: BoxShape.rectangle),
             ),
           ),
-          SizedBox(
-            height: 10,
-          ),
+
           // Event list view (right half of screen)
           Expanded(
             flex: 1,
