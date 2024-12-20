@@ -183,6 +183,7 @@ class _MyHomePageState extends State<MyHomePage> {
               backgroundColor: Colors.transparent,
               allowAppointmentResize: true,
               allowDragAndDrop: true,
+              onDragStart: dragStart,
               view: calendarView, // If Month is selected
               initialDisplayDate: DateTime.now(),
               dataSource: _dataSource,
@@ -591,6 +592,11 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _dataSource = AppointmentDataSource(_appointments);
     });
+  }
+
+  void dragStart(AppointmentDragStartDetails appointmentDragStartDetails) {
+    dynamic appointment = appointmentDragStartDetails.appointment;
+    CalendarResource? resource = appointmentDragStartDetails.resource;
   }
 }
 
