@@ -166,7 +166,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Text(
                       "Month",
                       style: TextStyle(
-                        color: selectedIndex == 1 ? Colors.white : Colors.black,
+                        color: selectedIndex == 1 ? Colors.black : Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -183,14 +183,24 @@ class _MyHomePageState extends State<MyHomePage> {
               backgroundColor: Colors.transparent,
               allowAppointmentResize: true,
               allowDragAndDrop: true,
-              onDragStart: dragStart,
               view: calendarView, // If Month is selected
               initialDisplayDate: DateTime.now(),
               dataSource: _dataSource,
               onTap: _onCalendarTap,
               monthViewSettings: MonthViewSettings(
-                  appointmentDisplayMode: MonthAppointmentDisplayMode.indicator,
-                  showAgenda: true),
+                appointmentDisplayMode: MonthAppointmentDisplayMode.appointment, // Display appointments
+                agendaItemHeight: 10, // Height of agenda items
+                agendaStyle: AgendaStyle(
+                  appointmentTextStyle: TextStyle(
+                    fontSize: 16, // Font size for agenda text
+                    color: Colors.black,
+                  ),
+                  dayTextStyle: TextStyle(
+                    fontSize: 14, // Font size for day text
+                    color: Colors.grey,
+                  ),
+                ),
+              ),
               blackoutDates: [
                 DateTime.now().subtract(Duration(hours: 48)),
                 DateTime.now().subtract(Duration(hours: 28)),
@@ -200,6 +210,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   border: Border.all(color: Colors.red, width: 2),
                   borderRadius: BorderRadius.all(Radius.circular(4)),
                   shape: BoxShape.rectangle),
+              timeSlotViewSettings: TimeSlotViewSettings(
+                timeIntervalHeight: 80, // Adjust height for time slots (default is 60)
+                timeTextStyle: TextStyle(
+                  fontSize: 14, // Font size for time labels
+                  color: Colors.black,
+                ),
+
+              ),
             ),
           ),
 
@@ -594,10 +612,6 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void dragStart(AppointmentDragStartDetails appointmentDragStartDetails) {
-    dynamic appointment = appointmentDragStartDetails.appointment;
-    CalendarResource? resource = appointmentDragStartDetails.resource;
-  }
 }
 
 class MyHttpOverrides extends HttpOverrides {
