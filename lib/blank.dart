@@ -166,7 +166,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Text(
                       "Month",
                       style: TextStyle(
-                        color: selectedIndex == 1 ? Colors.black : Colors.white,
+                        color: selectedIndex == 1 ? Colors.white : Colors.black,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -188,19 +188,8 @@ class _MyHomePageState extends State<MyHomePage> {
               dataSource: _dataSource,
               onTap: _onCalendarTap,
               monthViewSettings: MonthViewSettings(
-                appointmentDisplayMode: MonthAppointmentDisplayMode.appointment, // Display appointments
-                agendaItemHeight: 10, // Height of agenda items
-                agendaStyle: AgendaStyle(
-                  appointmentTextStyle: TextStyle(
-                    fontSize: 16, // Font size for agenda text
-                    color: Colors.black,
-                  ),
-                  dayTextStyle: TextStyle(
-                    fontSize: 14, // Font size for day text
-                    color: Colors.grey,
-                  ),
-                ),
-              ),
+                  appointmentDisplayMode: MonthAppointmentDisplayMode.indicator,
+                  showAgenda: true),
               blackoutDates: [
                 DateTime.now().subtract(Duration(hours: 48)),
                 DateTime.now().subtract(Duration(hours: 28)),
@@ -210,14 +199,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   border: Border.all(color: Colors.red, width: 2),
                   borderRadius: BorderRadius.all(Radius.circular(4)),
                   shape: BoxShape.rectangle),
-              timeSlotViewSettings: TimeSlotViewSettings(
-                timeIntervalHeight: 80, // Adjust height for time slots (default is 60)
-                timeTextStyle: TextStyle(
-                  fontSize: 14, // Font size for time labels
-                  color: Colors.black,
-                ),
-
-              ),
             ),
           ),
 
@@ -611,7 +592,6 @@ class _MyHomePageState extends State<MyHomePage> {
       _dataSource = AppointmentDataSource(_appointments);
     });
   }
-
 }
 
 class MyHttpOverrides extends HttpOverrides {
