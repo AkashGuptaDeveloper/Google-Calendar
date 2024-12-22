@@ -5,7 +5,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+
 //----------------------------------------------------------------------------//
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,6 +13,7 @@ Future<void> main() async {
   GestureBinding.instance.resamplingEnabled = true;
   runApp(const MyApp());
 }
+
 //----------------------------------------------------------------------------//
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 //----------------------------------------------------------------------------//
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -38,6 +40,7 @@ class MyHomePage extends StatefulWidget {
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
+
 //----------------------------------------------------------------------------//
 class _MyHomePageState extends State<MyHomePage> {
   final List<Appointment> _appointments = <Appointment>[];
@@ -54,19 +57,23 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     _dataSource = AppointmentDataSource(_appointments);
   }
+
 //----------------------------------------------------------------------------//
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF3788D3),
-        title: Text(widget.title,style: TextStyle(
-            fontFamily: "Montserrat",
-            fontStyle: FontStyle.normal,
-            color: Colors.white,
-            fontWeight: FontWeight.w500,
-            fontSize: 20,
-            letterSpacing: 1),),
+        title: Text(
+          widget.title,
+          style: TextStyle(
+              fontFamily: "Montserrat",
+              fontStyle: FontStyle.normal,
+              color: Colors.white,
+              fontWeight: FontWeight.w500,
+              fontSize: 20,
+              letterSpacing: 1),
+        ),
       ),
       backgroundColor: Colors.white,
       body: Column(
@@ -94,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     decoration: BoxDecoration(
                       color: selectedIndex == 0
                           ? Color(0xFF3788D3) // Highlight color when selected
-                          :  Color(0xFF3788D3).withOpacity(0.8) ,
+                          : Color(0xFF3788D3).withOpacity(0.8),
                       borderRadius: BorderRadius.circular(10), // Rounded edges
                       boxShadow: [
                         if (selectedIndex == 0)
@@ -113,8 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           fontFamily: "Montserrat",
                           fontStyle: FontStyle.normal,
                           fontSize: 15,
-                          letterSpacing: 1
-                      ),
+                          letterSpacing: 1),
                     ),
                   ),
                 ),
@@ -132,7 +138,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     decoration: BoxDecoration(
                       color: selectedIndex == 1
                           ? Color(0xFF3788D3) // Highlight color when selected
-                          :  Color(0xFF3788D3).withOpacity(0.8) ,
+                          : Color(0xFF3788D3).withOpacity(0.8),
                       borderRadius: BorderRadius.circular(10), // Rounded edges
                       boxShadow: [
                         if (selectedIndex == 1)
@@ -143,17 +149,14 @@ class _MyHomePageState extends State<MyHomePage> {
                           )
                       ],
                     ),
-                    child: Text(
-                        "Week",
+                    child: Text("Week",
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontFamily: "Montserrat",
                             fontStyle: FontStyle.normal,
                             fontSize: 15,
-                            letterSpacing: 1
-                        )
-                    ),
+                            letterSpacing: 1)),
                   ),
                 ),
                 // Month Button
@@ -170,7 +173,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     decoration: BoxDecoration(
                       color: selectedIndex == 2
                           ? Color(0xFF3788D3) // Highlight color when selected
-                          :  Color(0xFF3788D3).withOpacity(0.8) ,
+                          : Color(0xFF3788D3).withOpacity(0.8),
                       borderRadius: BorderRadius.circular(10), // Rounded edges
                       boxShadow: [
                         if (selectedIndex == 3)
@@ -181,17 +184,14 @@ class _MyHomePageState extends State<MyHomePage> {
                           )
                       ],
                     ),
-                    child: Text(
-                        "Month",
+                    child: Text("Month",
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontFamily: "Montserrat",
                             fontStyle: FontStyle.normal,
                             fontSize: 15,
-                            letterSpacing: 1
-                        )
-                    ),
+                            letterSpacing: 1)),
                   ),
                 ),
               ],
@@ -211,7 +211,8 @@ class _MyHomePageState extends State<MyHomePage> {
               dataSource: _dataSource,
               onTap: _onCalendarTap,
               monthViewSettings: MonthViewSettings(
-                appointmentDisplayMode: MonthAppointmentDisplayMode.appointment, // Display appointments
+                appointmentDisplayMode: MonthAppointmentDisplayMode
+                    .appointment, // Display appointments
                 agendaItemHeight: 10, // Height of agenda items
                 agendaStyle: AgendaStyle(
                   appointmentTextStyle: TextStyle(
@@ -234,12 +235,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   borderRadius: BorderRadius.all(Radius.circular(4)),
                   shape: BoxShape.rectangle),
               timeSlotViewSettings: TimeSlotViewSettings(
-                timeIntervalHeight: 80, // Adjust height for time slots (default is 60)
+                timeIntervalHeight:
+                    80, // Adjust height for time slots (default is 60)
                 timeTextStyle: TextStyle(
                   fontSize: 14, // Font size for time labels
                   color: Colors.black,
                 ),
-
               ),
             ),
           ),
@@ -319,14 +320,12 @@ class _MyHomePageState extends State<MyHomePage> {
                                   color: Colors.black,
                                   fontWeight: FontWeight.w400,
                                   fontSize: 18,
-                                  letterSpacing: 1
-                              ),
+                                  letterSpacing: 1),
                             ),
                           ),
                           SizedBox(height: 5.0),
                           Divider(
-                            color:
-                            Colors.grey,
+                            color: Colors.grey,
                             thickness: 0.3,
                           ),
                           SizedBox(height: 5.0),
@@ -350,11 +349,10 @@ class _MyHomePageState extends State<MyHomePage> {
                                 fontWeight: FontWeight.w400,
                                 fontSize: 15,
                                 letterSpacing: 0.5),
-                            decoration:BoxDecoration(
+                            decoration: BoxDecoration(
                               color: Colors.white10,
                               borderRadius: BorderRadius.circular(8.0),
-                              border: Border.all(
-                                  color: Colors.black, width: 1),
+                              border: Border.all(color: Colors.black, width: 1),
                             ),
                             padding: EdgeInsets.all(16.0),
                           ),
@@ -379,19 +377,17 @@ class _MyHomePageState extends State<MyHomePage> {
                                 fontWeight: FontWeight.w400,
                                 fontSize: 15,
                                 letterSpacing: 0.5),
-                            decoration:BoxDecoration(
+                            decoration: BoxDecoration(
                               color: Colors.white10,
                               borderRadius: BorderRadius.circular(8.0),
-                              border: Border.all(
-                                  color: Colors.black, width: 1),
+                              border: Border.all(color: Colors.black, width: 1),
                             ),
                             padding: EdgeInsets.all(16.0),
                           ),
                           SizedBox(height: 13.0),
                           GestureDetector(
                             onTap: () async {
-                              hideKeyboard(
-                                  context);
+                              hideKeyboard(context);
                               DateTime? pickedDate = await showDatePicker(
                                 context: context,
                                 initialDate: selectedDate,
@@ -421,8 +417,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           SizedBox(height: 13.0),
                           GestureDetector(
                             onTap: () async {
-                              hideKeyboard(
-                                  context);
+                              hideKeyboard(context);
                               DateTime? pickedDate = await showDatePicker(
                                 context: context,
                                 initialDate: selectedDate,
@@ -518,15 +513,15 @@ class _MyHomePageState extends State<MyHomePage> {
                               Expanded(
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor:const Color(0xFF3788D3), // Customize button color
+                                    backgroundColor: const Color(
+                                        0xFF3788D3), // Customize button color
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(
                                           10.0), // Adjust the value for rounded corners
                                     ),
                                   ),
                                   onPressed: () {
-                                    hideKeyboard(
-                                        context);
+                                    hideKeyboard(context);
                                     if (eventController.text.isNotEmpty &&
                                         descriptionController.text.isNotEmpty &&
                                         startDate != null &&
@@ -544,10 +539,11 @@ class _MyHomePageState extends State<MyHomePage> {
                                       _updateCalendar();
                                       Navigator.of(context).pop();
                                     } else {
-                                      ScaffoldMessenger.of(context).showSnackBar(
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
                                         SnackBar(
-                                          content:
-                                          Text('Please fill all fields correctly'),
+                                          content: Text(
+                                              'Please fill all fields correctly'),
                                         ),
                                       );
                                     }
@@ -568,32 +564,31 @@ class _MyHomePageState extends State<MyHomePage> {
                               SizedBox(width: 5),
                               Expanded(
                                 child: SizedBox(
-                                    child:  ElevatedButton(
-                                      onPressed: () async {
-                                        hideKeyboard(
-                                            context);
-                                        Navigator.pop(context);
-                                        formKey.currentState?.reset();
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors
-                                            .black.withOpacity(0.6), // Customize button color
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(
-                                              10.0), // Adjust the value for rounded corners
-                                        ),
-                                      ),
-                                      child: Text(
-                                        "Cancel",
-                                        style: TextStyle(
-                                            fontFamily: "Montserrat",
-                                            fontStyle: FontStyle.normal,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 15,
-                                            letterSpacing: 1),
-                                      ),
-                                    )),
+                                    child: ElevatedButton(
+                                  onPressed: () async {
+                                    hideKeyboard(context);
+                                    Navigator.pop(context);
+                                    formKey.currentState?.reset();
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.black.withOpacity(
+                                        0.6), // Customize button color
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          10.0), // Adjust the value for rounded corners
+                                    ),
+                                  ),
+                                  child: Text(
+                                    "Cancel",
+                                    style: TextStyle(
+                                        fontFamily: "Montserrat",
+                                        fontStyle: FontStyle.normal,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 15,
+                                        letterSpacing: 1),
+                                  ),
+                                )),
                               ),
                             ],
                           ),
@@ -634,7 +629,7 @@ class _MyHomePageState extends State<MyHomePage> {
 //----------------------------------------------------------------------------//
   void _showEventDetailsDialog(Appointment appointment) {
     TextEditingController eventController =
-    TextEditingController(text: appointment.subject);
+        TextEditingController(text: appointment.subject);
     DateTime? startDate = appointment.startTime;
     DateTime? endDate = appointment.endTime;
 
@@ -780,10 +775,11 @@ class _MyHomePageState extends State<MyHomePage> {
       },
     );
   }
+
 //----------------------------------------------------------------------------//
   void _onEventTap(Appointment appointment, int index) {
     TextEditingController eventController =
-    TextEditingController(text: appointment.subject);
+        TextEditingController(text: appointment.subject);
 
     showDialog(
       context: context,
@@ -836,12 +832,14 @@ class _MyHomePageState extends State<MyHomePage> {
       },
     );
   }
+
 //----------------------------------------------------------------------------//
   void _updateCalendar() {
     setState(() {
       _dataSource = AppointmentDataSource(_appointments);
     });
   }
+
 //----------------------------------------------------------------------------//
   //-----------------hideKeyboard
   static void hideKeyboard(BuildContext context) {
@@ -854,6 +852,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 //----------------------------------------------------------------------------//
 }
+
 //----------------------------------------------------------------------------//
 class MyHttpOverrides extends HttpOverrides {
   @override
@@ -863,14 +862,16 @@ class MyHttpOverrides extends HttpOverrides {
           (X509Certificate cert, String host, int port) => true;
   }
 }
+
 //----------------------------------------------------------------------------//
 class MyCustomScrollBehavior extends MaterialScrollBehavior {
   @override
   Set<PointerDeviceKind> get dragDevices => {
-    PointerDeviceKind.touch,
-    PointerDeviceKind.mouse,
-  };
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+      };
 }
+
 //----------------------------------------------------------------------------//
 class AppointmentDataSource extends CalendarDataSource {
   AppointmentDataSource(List<Appointment> source) {

@@ -260,7 +260,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         TextField(
                           controller: eventController,
                           decoration:
-                          InputDecoration(hintText: 'Enter Event Title'),
+                              InputDecoration(hintText: 'Enter Event Title'),
                         ),
                         SizedBox(height: 10),
                         ListTile(
@@ -382,7 +382,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _showEventDetailsDialog(Appointment appointment) {
     TextEditingController eventController =
-    TextEditingController(text: appointment.subject);
+        TextEditingController(text: appointment.subject);
     DateTime? startDate = appointment.startTime;
     DateTime? endDate = appointment.endTime;
 
@@ -533,7 +533,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _onEventTap(Appointment appointment, int index) {
     TextEditingController eventController =
-    TextEditingController(text: appointment.subject);
+        TextEditingController(text: appointment.subject);
 
     showDialog(
       context: context,
@@ -606,9 +606,9 @@ class MyHttpOverrides extends HttpOverrides {
 class MyCustomScrollBehavior extends MaterialScrollBehavior {
   @override
   Set<PointerDeviceKind> get dragDevices => {
-    PointerDeviceKind.touch,
-    PointerDeviceKind.mouse,
-  };
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+      };
 }
 
 class AppointmentDataSource extends CalendarDataSource {

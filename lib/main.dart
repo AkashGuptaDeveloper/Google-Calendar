@@ -1,8 +1,14 @@
+// ignore_for_file: file_names, non_constant_identifier_names, use_build_context_synchronously, deprecated_member_use, await_only_futures, unnecessary_null_comparison, unused_local_variable
 import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
+//----------------------------------------------------------------------------//
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   HttpOverrides.global = MyHttpOverrides();
@@ -10,9 +16,11 @@ Future<void> main() async {
   runApp(const MyApp());
 }
 
+//----------------------------------------------------------------------------//
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+//----------------------------------------------------------------------------//
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -27,6 +35,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+//----------------------------------------------------------------------------//
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
   final String title;
@@ -35,6 +44,7 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+//----------------------------------------------------------------------------//
 class _MyHomePageState extends State<MyHomePage> {
   final List<Appointment> _appointments = <Appointment>[];
   late AppointmentDataSource _dataSource;
@@ -42,23 +52,35 @@ class _MyHomePageState extends State<MyHomePage> {
 
   CalendarView calendarView = CalendarView.day;
   CalendarController calendarController = CalendarController();
+
+//----------------------------------------------------------------------------//
   @override
   void initState() {
     super.initState();
     _dataSource = AppointmentDataSource(_appointments);
   }
 
+//----------------------------------------------------------------------------//
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        backgroundColor: const Color(0xFF3788D3),
+        title: Text(
+          widget.title,
+          style: TextStyle(
+              fontFamily: "Montserrat",
+              fontStyle: FontStyle.normal,
+              color: Colors.white,
+              fontWeight: FontWeight.w500,
+              fontSize: 20,
+              letterSpacing: 1),
+        ),
       ),
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          Container(
+          /* Container(
             padding: EdgeInsets.all(12),
             decoration: BoxDecoration(
               color: Colors.white, // Background color
@@ -80,13 +102,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                     decoration: BoxDecoration(
                       color: selectedIndex == 0
-                          ? Colors.blue // Highlight color when selected
-                          : Theme.of(context).colorScheme.inversePrimary,
+                          ? Color(0xFF3788D3) // Highlight color when selected
+                          : Color(0xFF3788D3).withOpacity(0.8),
                       borderRadius: BorderRadius.circular(10), // Rounded edges
                       boxShadow: [
                         if (selectedIndex == 0)
                           BoxShadow(
-                            // ignore: deprecated_member_use
                             color: Colors.blue.withOpacity(0.5),
                             blurRadius: 6,
                             offset: Offset(0, 2),
@@ -96,9 +117,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Text(
                       "Day",
                       style: TextStyle(
-                        color: selectedIndex == 0 ? Colors.white : Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ),
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: "Montserrat",
+                          fontStyle: FontStyle.normal,
+                          fontSize: 15,
+                          letterSpacing: 1),
                     ),
                   ),
                 ),
@@ -115,26 +139,26 @@ class _MyHomePageState extends State<MyHomePage> {
                     padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                     decoration: BoxDecoration(
                       color: selectedIndex == 1
-                          ? Colors.blue // Highlight color when selected
-                          : Theme.of(context).colorScheme.inversePrimary,
+                          ? Color(0xFF3788D3) // Highlight color when selected
+                          : Color(0xFF3788D3).withOpacity(0.8),
                       borderRadius: BorderRadius.circular(10), // Rounded edges
                       boxShadow: [
                         if (selectedIndex == 1)
                           BoxShadow(
-                            // ignore: deprecated_member_use
                             color: Colors.blue.withOpacity(0.5),
                             blurRadius: 6,
                             offset: Offset(0, 2),
                           )
                       ],
                     ),
-                    child: Text(
-                      "Week",
-                      style: TextStyle(
-                        color: selectedIndex == 1 ? Colors.white : Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    child: Text("Week",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "Montserrat",
+                            fontStyle: FontStyle.normal,
+                            fontSize: 15,
+                            letterSpacing: 1)),
                   ),
                 ),
                 // Month Button
@@ -150,35 +174,35 @@ class _MyHomePageState extends State<MyHomePage> {
                     padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                     decoration: BoxDecoration(
                       color: selectedIndex == 2
-                          ? Colors.blue // Highlight color when selected
-                          : Theme.of(context).colorScheme.inversePrimary,
+                          ? Color(0xFF3788D3) // Highlight color when selected
+                          : Color(0xFF3788D3).withOpacity(0.8),
                       borderRadius: BorderRadius.circular(10), // Rounded edges
                       boxShadow: [
                         if (selectedIndex == 3)
                           BoxShadow(
-                            // ignore: deprecated_member_use
                             color: Colors.blue.withOpacity(0.5),
                             blurRadius: 6,
                             offset: Offset(0, 2),
                           )
                       ],
                     ),
-                    child: Text(
-                      "Month",
-                      style: TextStyle(
-                        color: selectedIndex == 1 ? Colors.white : Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    child: Text("Month",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "Montserrat",
+                            fontStyle: FontStyle.normal,
+                            fontSize: 15,
+                            letterSpacing: 1)),
                   ),
                 ),
               ],
             ),
-          ),
+          ),*/
           // Calendar view (left half of screen)
           Expanded(
-            flex: 3,
             child: SfCalendar(
+              todayHighlightColor: Colors.green,
               controller: calendarController,
               backgroundColor: Colors.transparent,
               allowAppointmentResize: true,
@@ -201,87 +225,540 @@ class _MyHomePageState extends State<MyHomePage> {
                   shape: BoxShape.rectangle),
             ),
           ),
-
+/*
           // Event list view (right half of screen)
           Expanded(
-            flex: 1,
+            flex: 3,
             child: ListView.builder(
+              shrinkWrap: true,
+              padding: EdgeInsets.zero,
               itemCount: _appointments.length,
               itemBuilder: (context, index) {
                 Appointment appointment = _appointments[index];
+                String firstWord = appointment.subject.split(" ").first; // Extracting first word
+
                 return ListTile(
-                  title: Text(appointment.subject),
+                  title: Text(appointment.subject,style: TextStyle(
+                      fontFamily: "Montserrat",
+                      fontStyle: FontStyle.normal,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 18,
+                      letterSpacing: 1)),
                   subtitle: Text(
-                      'Start: ${appointment.startTime}\nEnd: ${appointment.endTime}'),
+                      'Start: ${DateFormat('dd MMM yy hh:mm a').format(appointment.startTime)}\nEnd: ${DateFormat('dd MMM yy hh:mm a').format(appointment.endTime)}',style: TextStyle(
+                  fontFamily: "Montserrat",
+                      fontStyle: FontStyle.normal,
+                      color: Colors.grey[800],
+                  fontWeight: FontWeight.w400,
+                  fontSize: 14,
+                      letterSpacing: 1)),
                   leading: CircleAvatar(
                     backgroundColor: appointment.color,
+                    child: Text(
+                      firstWord[0].toUpperCase(), // Display the first letter of the first word
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
                   onTap: () => _onEventTap(appointment, index),
                 );
               },
             ),
-          ),
+          ),*/
           SizedBox(
-            height: 10,
+            height: 20,
           ),
         ],
       ),
     );
   }
 
+//----------------------------------------------------------------------------//
   void _onCalendarTap(CalendarTapDetails details) {
     setState(() {
-      // Check if the tap is on an event or on an empty cell
       if (details.targetElement == CalendarElement.appointment) {
-        // If it's an event, get the clicked event
         Appointment clickedAppointment = details.appointments!.first;
-
-        // Show the event details dialog
         _showEventDetailsDialog(clickedAppointment);
       } else if (details.targetElement == CalendarElement.calendarCell) {
-        // If it's an empty cell, allow user to add a new event
         DateTime selectedDate = details.date!;
         DateTime? startDate;
         DateTime? endDate;
-
+        Color selectedColor = const Color(0xFF3788D3); // Default color
         TextEditingController eventController = TextEditingController();
-
+        TextEditingController descriptionController = TextEditingController();
         showDialog(
           context: context,
-          builder: (BuildContext context) {
-            return StatefulBuilder(
-              builder: (BuildContext context, StateSetter setState) {
-                return AlertDialog(
-                  title: Text('Add Event'),
-                  content: SingleChildScrollView(
+          barrierDismissible: true,
+          builder: (BuildContext context) => PopScope(
+            canPop: false,
+            onPopInvoked: (didPop) async => false,
+            child: AlertDialog(
+              backgroundColor: Colors.transparent,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12.0),
+              ),
+              contentPadding: EdgeInsets.zero,
+              content: SingleChildScrollView(
+                child: StatefulBuilder(
+                  builder: (BuildContext context, StateSetter setState) {
+                    return Container(
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Align(
+                            child: Text(
+                              "Add Activity",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontFamily: "Montserrat",
+                                  fontStyle: FontStyle.normal,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 18,
+                                  letterSpacing: 1),
+                            ),
+                          ),
+                          SizedBox(height: 5.0),
+                          Divider(
+                            color: Colors.grey,
+                            thickness: 0.3,
+                          ),
+                          SizedBox(height: 5.0),
+                          CupertinoTextField(
+                            controller: eventController,
+                            keyboardType: TextInputType.name,
+                            enabled: true,
+                            placeholder: 'Task Name',
+                            style: TextStyle(
+                              fontFamily: "Montserrat",
+                              fontStyle: FontStyle.normal,
+                              color: Colors.black.withOpacity(0.8),
+                              fontWeight: FontWeight.w400,
+                              fontSize: 15,
+                              letterSpacing: 0.5,
+                            ),
+                            placeholderStyle: TextStyle(
+                                fontFamily: "Montserrat",
+                                fontStyle: FontStyle.normal,
+                                color: Colors.black.withOpacity(0.8),
+                                fontWeight: FontWeight.w400,
+                                fontSize: 15,
+                                letterSpacing: 0.5),
+                            decoration: BoxDecoration(
+                              color: Colors.white10,
+                              borderRadius: BorderRadius.circular(8.0),
+                              border: Border.all(color: Colors.black, width: 1),
+                            ),
+                            padding: EdgeInsets.all(16.0),
+                          ),
+                          SizedBox(height: 13.0),
+                          CupertinoTextField(
+                            controller: descriptionController,
+                            keyboardType: TextInputType.name,
+                            enabled: true,
+                            placeholder: 'Task Description',
+                            style: TextStyle(
+                              fontFamily: "Montserrat",
+                              fontStyle: FontStyle.normal,
+                              color: Colors.black.withOpacity(0.8),
+                              fontWeight: FontWeight.w400,
+                              fontSize: 15,
+                              letterSpacing: 0.5,
+                            ),
+                            placeholderStyle: TextStyle(
+                                fontFamily: "Montserrat",
+                                fontStyle: FontStyle.normal,
+                                color: Colors.black.withOpacity(0.8),
+                                fontWeight: FontWeight.w400,
+                                fontSize: 15,
+                                letterSpacing: 0.5),
+                            decoration: BoxDecoration(
+                              color: Colors.white10,
+                              borderRadius: BorderRadius.circular(8.0),
+                              border: Border.all(color: Colors.black, width: 1),
+                            ),
+                            padding: EdgeInsets.all(16.0),
+                          ),
+                          SizedBox(height: 13.0),
+                          GestureDetector(
+                            onTap: () async {
+                              hideKeyboard(context);
+                              DateTime? pickedDate = await showDatePicker(
+                                context: context,
+                                initialDate: selectedDate,
+                                firstDate: DateTime(2000),
+                                lastDate: DateTime(2100),
+                              );
+                              if (pickedDate != null) {
+                                TimeOfDay? pickedTime = await showTimePicker(
+                                  context: context,
+                                  initialTime: TimeOfDay.now(),
+                                );
+                                if (pickedTime != null) {
+                                  setState(() {
+                                    startDate = DateTime(
+                                      pickedDate.year,
+                                      pickedDate.month,
+                                      pickedDate.day,
+                                      pickedTime.hour,
+                                      pickedTime.minute,
+                                    );
+                                  });
+                                }
+                              }
+                            },
+                            child: _buildDatePickerField(startDate, 'Start'),
+                          ),
+                          SizedBox(height: 13.0),
+                          GestureDetector(
+                            onTap: () async {
+                              hideKeyboard(context);
+                              DateTime? pickedDate = await showDatePicker(
+                                context: context,
+                                initialDate: selectedDate,
+                                firstDate: DateTime(2000),
+                                lastDate: DateTime(2100),
+                              );
+                              if (pickedDate != null) {
+                                TimeOfDay? pickedTime = await showTimePicker(
+                                  context: context,
+                                  initialTime: TimeOfDay.now(),
+                                );
+                                if (pickedTime != null) {
+                                  setState(() {
+                                    endDate = DateTime(
+                                      pickedDate.year,
+                                      pickedDate.month,
+                                      pickedDate.day,
+                                      pickedTime.hour,
+                                      pickedTime.minute,
+                                    );
+                                  });
+                                }
+                              }
+                            },
+                            child: _buildDatePickerField(endDate, 'End'),
+                          ),
+                          SizedBox(height: 13.0),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: selectedColor,
+                              // Customize button color
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                    10.0), // Adjust the value for rounded corners
+                              ),
+                            ),
+                            onPressed: () {
+                              hideKeyboard(context);
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: Text('Pick a color',
+                                        style: TextStyle(
+                                          fontFamily: "Montserrat",
+                                          fontStyle: FontStyle.normal,
+                                          color: Colors.black.withOpacity(0.8),
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 15,
+                                          letterSpacing: 0.5,
+                                        )),
+                                    content: SingleChildScrollView(
+                                      child: BlockPicker(
+                                        pickerColor: selectedColor,
+                                        onColorChanged: (Color color) {
+                                          setState(() {
+                                            selectedColor = color;
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text(
+                                          'Done',
+                                          style: TextStyle(
+                                            fontFamily: "Montserrat",
+                                            fontStyle: FontStyle.normal,
+                                            color:
+                                                Colors.black.withOpacity(0.8),
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 15,
+                                            letterSpacing: 0.5,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            },
+                            child: Text('Select Color',
+                                style: TextStyle(
+                                  fontFamily: "Montserrat",
+                                  fontStyle: FontStyle.normal,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 15,
+                                  letterSpacing: 0.5,
+                                )),
+                          ),
+                          SizedBox(height: 13.0),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color(0xFF3788D3),
+                                    // Customize button color
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          10.0), // Adjust the value for rounded corners
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    hideKeyboard(context);
+                                    if (eventController.text.isNotEmpty &&
+                                        descriptionController.text.isNotEmpty &&
+                                        startDate != null &&
+                                        endDate != null &&
+                                        startDate!.isBefore(endDate!)) {
+                                      setState(() {
+                                        _appointments.add(Appointment(
+                                          startTime: startDate!,
+                                          endTime: endDate!,
+                                          subject: eventController.text,
+                                          notes: descriptionController.text,
+                                          color: selectedColor,
+                                        ));
+                                      });
+                                      _updateCalendar();
+                                      Navigator.of(context).pop();
+                                    } else {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                              'Please fill all fields correctly'),
+                                        ),
+                                      );
+                                    }
+                                  },
+                                  child: Text(
+                                    "Create Task",
+                                    style: TextStyle(
+                                        fontFamily: "Montserrat",
+                                        fontStyle: FontStyle.normal,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 15,
+                                        letterSpacing: 1),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 5),
+                              Expanded(
+                                child: SizedBox(
+                                    child: ElevatedButton(
+                                  onPressed: () async {
+                                    hideKeyboard(context);
+                                    Navigator.pop(context);
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor:
+                                        Colors.black.withOpacity(0.6),
+                                    // Customize button color
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          10.0), // Adjust the value for rounded corners
+                                    ),
+                                  ),
+                                  child: Text(
+                                    "Cancel",
+                                    style: TextStyle(
+                                        fontFamily: "Montserrat",
+                                        fontStyle: FontStyle.normal,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 15,
+                                        letterSpacing: 1),
+                                  ),
+                                )),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+          ),
+        );
+      }
+    });
+  }
+
+  Widget _buildDatePickerField(DateTime? date, String label) {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black),
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+      padding: EdgeInsets.all(16.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            date == null
+                ? 'Select $label Date & Time'
+                : '$label: ${DateFormat('dd MMM yy hh:mm a').format(date)}',
+          ),
+          Icon(Icons.arrow_forward_ios_outlined, size: 20),
+        ],
+      ),
+    );
+  }
+
+//----------------------------------------------------------------------------//
+  void _showEventDetailsDialog(Appointment appointment) {
+    TextEditingController eventController =
+        TextEditingController(text: appointment.subject);
+    TextEditingController descController =
+        TextEditingController(text: appointment.notes);
+    DateTime? startDate = appointment.startTime;
+    DateTime? endDate = appointment.endTime;
+    Color selectedColor = appointment.color; // Default color
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
+            return PopScope(
+              canPop: false,
+              onPopInvoked: (didPop) async => false,
+              child: AlertDialog(
+                backgroundColor: Colors.transparent,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+                contentPadding: EdgeInsets.zero,
+                content: SingleChildScrollView(
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        TextField(
-                          controller: eventController,
-                          decoration:
-                          InputDecoration(hintText: 'Enter Event Title'),
-                        ),
-                        SizedBox(height: 10),
-                        ListTile(
-                          title: Text(
-                            startDate == null
-                                ? 'Select Start Date & Time'
-                                : 'Start: ${startDate.toString()}',
+                        Align(
+                          child: Text(
+                            "Event Details",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontFamily: "Montserrat",
+                                fontStyle: FontStyle.normal,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 18,
+                                letterSpacing: 1),
                           ),
-                          trailing: Icon(Icons.calendar_today),
+                        ),
+                        SizedBox(height: 5.0),
+                        Divider(
+                          color: Colors.grey,
+                          thickness: 0.3,
+                        ),
+                        SizedBox(height: 5.0),
+                        CupertinoTextField(
+                          controller: eventController,
+                          keyboardType: TextInputType.name,
+                          enabled: true,
+                          placeholder: 'Task Name',
+                          style: TextStyle(
+                            fontFamily: "Montserrat",
+                            fontStyle: FontStyle.normal,
+                            color: Colors.black.withOpacity(0.8),
+                            fontWeight: FontWeight.w400,
+                            fontSize: 15,
+                            letterSpacing: 0.5,
+                          ),
+                          placeholderStyle: TextStyle(
+                              fontFamily: "Montserrat",
+                              fontStyle: FontStyle.normal,
+                              color: Colors.black.withOpacity(0.8),
+                              fontWeight: FontWeight.w400,
+                              fontSize: 15,
+                              letterSpacing: 0.5),
+                          decoration: BoxDecoration(
+                            color: Colors.white10,
+                            borderRadius: BorderRadius.circular(8.0),
+                            border: Border.all(color: Colors.black, width: 1),
+                          ),
+                          padding: EdgeInsets.all(16.0),
+                        ),
+                        SizedBox(height: 13.0),
+                        CupertinoTextField(
+                          controller: descController,
+                          keyboardType: TextInputType.name,
+                          enabled: true,
+                          placeholder: 'Task Description',
+                          style: TextStyle(
+                            fontFamily: "Montserrat",
+                            fontStyle: FontStyle.normal,
+                            color: Colors.black.withOpacity(0.8),
+                            fontWeight: FontWeight.w400,
+                            fontSize: 15,
+                            letterSpacing: 0.5,
+                          ),
+                          placeholderStyle: TextStyle(
+                              fontFamily: "Montserrat",
+                              fontStyle: FontStyle.normal,
+                              color: Colors.black.withOpacity(0.8),
+                              fontWeight: FontWeight.w400,
+                              fontSize: 15,
+                              letterSpacing: 0.5),
+                          decoration: BoxDecoration(
+                            color: Colors.white10,
+                            borderRadius: BorderRadius.circular(8.0),
+                            border: Border.all(color: Colors.black, width: 1),
+                          ),
+                          padding: EdgeInsets.all(16.0),
+                        ),
+                        SizedBox(height: 13.0),
+                        GestureDetector(
                           onTap: () async {
+                            hideKeyboard(context);
+                            FocusScope.of(context).requestFocus(FocusNode());
+                            FocusScope.of(context).unfocus();
                             DateTime? pickedDate = await showDatePicker(
                               context: context,
-                              initialDate: selectedDate,
+                              initialDate: startDate!,
                               firstDate: DateTime(2000),
                               lastDate: DateTime(2100),
                             );
                             if (pickedDate != null) {
                               TimeOfDay? pickedTime = await showTimePicker(
-                                // ignore: use_build_context_synchronously
                                 context: context,
-                                initialTime: TimeOfDay.now(),
+                                initialTime: TimeOfDay.fromDateTime(startDate!),
                               );
                               if (pickedTime != null) {
                                 setState(() {
@@ -296,26 +773,22 @@ class _MyHomePageState extends State<MyHomePage> {
                               }
                             }
                           },
+                          child: _buildDatePickerField(startDate, 'Start'),
                         ),
-                        ListTile(
-                          title: Text(
-                            endDate == null
-                                ? 'Select End Date & Time'
-                                : 'End: ${endDate.toString()}',
-                          ),
-                          trailing: Icon(Icons.calendar_today),
+                        SizedBox(height: 13.0),
+                        GestureDetector(
                           onTap: () async {
+                            hideKeyboard(context);
                             DateTime? pickedDate = await showDatePicker(
                               context: context,
-                              initialDate: selectedDate,
+                              initialDate: endDate!,
                               firstDate: DateTime(2000),
                               lastDate: DateTime(2100),
                             );
                             if (pickedDate != null) {
                               TimeOfDay? pickedTime = await showTimePicker(
-                                // ignore: use_build_context_synchronously
                                 context: context,
-                                initialTime: TimeOfDay.now(),
+                                initialTime: TimeOfDay.fromDateTime(endDate!),
                               );
                               if (pickedTime != null) {
                                 setState(() {
@@ -330,200 +803,196 @@ class _MyHomePageState extends State<MyHomePage> {
                               }
                             }
                           },
+                          child: _buildDatePickerField(endDate, 'End'),
+                        ),
+                        SizedBox(height: 13.0),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: selectedColor,
+                            // Customize button color
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                  10.0), // Adjust the value for rounded corners
+                            ),
+                          ),
+                          onPressed: () {
+                            hideKeyboard(context);
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text('Pick a color',
+                                      style: TextStyle(
+                                        fontFamily: "Montserrat",
+                                        fontStyle: FontStyle.normal,
+                                        color: Colors.black.withOpacity(0.8),
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 15,
+                                        letterSpacing: 0.5,
+                                      )),
+                                  content: SingleChildScrollView(
+                                    child: BlockPicker(
+                                      pickerColor: selectedColor,
+                                      onColorChanged: (Color color) {
+                                        setState(() {
+                                          selectedColor = color;
+                                        });
+                                      },
+                                    ),
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text(
+                                        'Done',
+                                        style: TextStyle(
+                                          fontFamily: "Montserrat",
+                                          fontStyle: FontStyle.normal,
+                                          color: Colors.black.withOpacity(0.8),
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 15,
+                                          letterSpacing: 0.5,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                          child: Text('Selected Color',
+                              style: TextStyle(
+                                fontFamily: "Montserrat",
+                                fontStyle: FontStyle.normal,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 15,
+                                letterSpacing: 0.5,
+                              )),
+                        ),
+                        SizedBox(height: 13.0),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: const Color(0xFF3788D3),
+                                  // Customize button color
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        10.0), // Adjust the value for rounded corners
+                                  ),
+                                ),
+                                onPressed: () {
+                                  hideKeyboard(context);
+                                  if (eventController.text.isNotEmpty &&
+                                      descController.text.isNotEmpty &&
+                                      startDate != null &&
+                                      endDate != null &&
+                                      startDate!.isBefore(endDate!)) {
+                                    setState(() {
+                                      appointment.subject =
+                                          eventController.text;
+                                      appointment.startTime = startDate!;
+                                      appointment.endTime = endDate!;
+                                      appointment.color = selectedColor;
+                                      appointment.notes = descController.text;
+                                    });
+
+                                    // Update the data source and refresh the calendar
+                                    _updateCalendar();
+                                    Navigator.of(context).pop();
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                            'Please fill all fields correctly'),
+                                      ),
+                                    );
+                                  }
+                                },
+                                child: Text(
+                                  "Edit",
+                                  style: TextStyle(
+                                      fontFamily: "Montserrat",
+                                      fontStyle: FontStyle.normal,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 15,
+                                      letterSpacing: 1),
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 3),
+                            Expanded(
+                              child: SizedBox(
+                                  child: ElevatedButton(
+                                onPressed: () async {
+                                  hideKeyboard(context);
+                                  setState(() {
+                                    _appointments.remove(appointment);
+                                    _updateCalendar();
+                                  });
+                                  Navigator.pop(context);
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor:
+                                      Colors.red, // Customize button color
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        10.0), // Adjust the value for rounded corners
+                                  ),
+                                ),
+                                child: Text(
+                                  "Delete",
+                                  style: TextStyle(
+                                      fontFamily: "Montserrat",
+                                      fontStyle: FontStyle.normal,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 15,
+                                      letterSpacing: 1),
+                                ),
+                              )),
+                            ),
+                            SizedBox(width: 3),
+                            Expanded(
+                              child: SizedBox(
+                                  child: ElevatedButton(
+                                onPressed: () async {
+                                  hideKeyboard(context);
+                                  Navigator.pop(context);
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor:
+                                      Colors.black.withOpacity(0.6),
+                                  // Customize button color
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        10.0), // Adjust the value for rounded corners
+                                  ),
+                                ),
+                                child: Text(
+                                  "Close",
+                                  style: TextStyle(
+                                      fontFamily: "Montserrat",
+                                      fontStyle: FontStyle.normal,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 15,
+                                      letterSpacing: 1),
+                                ),
+                              )),
+                            ),
+                          ],
                         ),
                       ],
                     ),
                   ),
-                  actions: [
-                    TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: Text('Cancel'),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        if (eventController.text.isNotEmpty &&
-                            startDate != null &&
-                            endDate != null &&
-                            startDate!.isBefore(endDate!)) {
-                          setState(() {
-                            _appointments.add(Appointment(
-                              startTime: startDate!,
-                              endTime: endDate!,
-                              subject: eventController.text,
-                              color: Colors.blue,
-                            ));
-                          });
-
-                          // Call _updateCalendar to refresh the calendar
-                          _updateCalendar(); // Make sure this updates your calendar's data source
-
-                          Navigator.of(context).pop();
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text('Please fill all fields correctly'),
-                            ),
-                          );
-                        }
-                      },
-                      child: Text('Add'),
-                    ),
-                  ],
-                );
-              },
-            );
-          },
-        );
-      }
-    });
-  }
-
-  void _showEventDetailsDialog(Appointment appointment) {
-    TextEditingController eventController =
-    TextEditingController(text: appointment.subject);
-    DateTime? startDate = appointment.startTime;
-    DateTime? endDate = appointment.endTime;
-
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return StatefulBuilder(
-          builder: (BuildContext context, StateSetter setState) {
-            return AlertDialog(
-              title: Text('Event Details'),
-              content: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    TextField(
-                      controller: eventController,
-                      decoration: InputDecoration(hintText: 'Event Title'),
-                    ),
-                    SizedBox(height: 10),
-                    ListTile(
-                      title: Text(
-                        startDate == null
-                            ? 'Select Start Date & Time'
-                            : 'Start: ${startDate.toString()}',
-                      ),
-                      trailing: Icon(Icons.calendar_today),
-                      onTap: () async {
-                        FocusScope.of(context).requestFocus(FocusNode());
-                        FocusScope.of(context).unfocus();
-                        DateTime? pickedDate = await showDatePicker(
-                          context: context,
-                          initialDate: startDate!,
-                          firstDate: DateTime(2000),
-                          lastDate: DateTime(2100),
-                        );
-                        if (pickedDate != null) {
-                          TimeOfDay? pickedTime = await showTimePicker(
-                            // ignore: use_build_context_synchronously
-                            context: context,
-                            initialTime: TimeOfDay.fromDateTime(startDate!),
-                          );
-                          if (pickedTime != null) {
-                            setState(() {
-                              startDate = DateTime(
-                                pickedDate.year,
-                                pickedDate.month,
-                                pickedDate.day,
-                                pickedTime.hour,
-                                pickedTime.minute,
-                              );
-                            });
-                          }
-                        }
-                      },
-                    ),
-                    ListTile(
-                      title: Text(
-                        endDate == null
-                            ? 'Select End Date & Time'
-                            : 'End: ${endDate.toString()}',
-                      ),
-                      trailing: Icon(Icons.calendar_today),
-                      onTap: () async {
-                        FocusScope.of(context).requestFocus(FocusNode());
-                        FocusScope.of(context).unfocus();
-                        DateTime? pickedDate = await showDatePicker(
-                          context: context,
-                          initialDate: endDate!,
-                          firstDate: DateTime(2000),
-                          lastDate: DateTime(2100),
-                        );
-                        if (pickedDate != null) {
-                          TimeOfDay? pickedTime = await showTimePicker(
-                            // ignore: use_build_context_synchronously
-                            context: context,
-                            initialTime: TimeOfDay.fromDateTime(endDate!),
-                          );
-                          if (pickedTime != null) {
-                            setState(() {
-                              endDate = DateTime(
-                                pickedDate.year,
-                                pickedDate.month,
-                                pickedDate.day,
-                                pickedTime.hour,
-                                pickedTime.minute,
-                              );
-                            });
-                          }
-                        }
-                      },
-                    ),
-                  ],
                 ),
               ),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    FocusScope.of(context).requestFocus(FocusNode());
-                    FocusScope.of(context).unfocus();
-                    Navigator.of(context).pop();
-                  },
-                  child: Text('Cancel'),
-                ),
-                TextButton(
-                  onPressed: () {
-                    FocusScope.of(context).requestFocus(FocusNode());
-                    FocusScope.of(context).unfocus();
-                    if (eventController.text.isNotEmpty &&
-                        startDate != null &&
-                        endDate != null &&
-                        startDate!.isBefore(endDate!)) {
-                      setState(() {
-                        appointment.subject = eventController.text;
-                        appointment.startTime = startDate!;
-                        appointment.endTime = endDate!;
-                      });
-
-                      // Update the data source and refresh the calendar
-                      _updateCalendar();
-                      Navigator.of(context).pop();
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('Please fill all fields correctly'),
-                        ),
-                      );
-                    }
-                  },
-                  child: Text('Save'),
-                ),
-                TextButton(
-                  onPressed: () {
-                    setState(() {
-                      _appointments.remove(appointment);
-                      _updateCalendar();
-                    });
-                    Navigator.of(context).pop();
-                  },
-                  child: Text('Delete'),
-                ),
-              ],
             );
           },
         );
@@ -531,6 +1000,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+/*//----------------------------------------------------------------------------//
   void _onEventTap(Appointment appointment, int index) {
     TextEditingController eventController =
     TextEditingController(text: appointment.subject);
@@ -585,15 +1055,27 @@ class _MyHomePageState extends State<MyHomePage> {
         );
       },
     );
-  }
-
+  }*/
+//----------------------------------------------------------------------------//
   void _updateCalendar() {
     setState(() {
       _dataSource = AppointmentDataSource(_appointments);
     });
   }
+
+//----------------------------------------------------------------------------//
+  //-----------------hideKeyboard
+  static void hideKeyboard(BuildContext context) {
+    FocusScope.of(context).requestFocus(FocusNode());
+    FocusScope.of(context).unfocus();
+    FocusScopeNode currentFocus = FocusScope.of(context);
+    if (!currentFocus.hasPrimaryFocus) {
+      currentFocus.unfocus();
+    }
+  }
 }
 
+//----------------------------------------------------------------------------//
 class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
@@ -603,12 +1085,13 @@ class MyHttpOverrides extends HttpOverrides {
   }
 }
 
+//----------------------------------------------------------------------------//
 class MyCustomScrollBehavior extends MaterialScrollBehavior {
   @override
   Set<PointerDeviceKind> get dragDevices => {
-    PointerDeviceKind.touch,
-    PointerDeviceKind.mouse,
-  };
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+      };
 }
 
 class AppointmentDataSource extends CalendarDataSource {
