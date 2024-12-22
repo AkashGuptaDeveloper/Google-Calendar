@@ -12,7 +12,6 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
@@ -90,50 +89,6 @@ class _TodoWidgetState extends State<TodoWidget> {
                   shape: BoxShape.rectangle),
             ),
           ),
-/*
-          // Event list view (right half of screen)
-          Expanded(
-            flex: 3,
-            child: ListView.builder(
-              shrinkWrap: true,
-              padding: EdgeInsets.zero,
-              itemCount: _appointments.length,
-              itemBuilder: (context, index) {
-                Appointment appointment = _appointments[index];
-                String firstWord = appointment.subject.split(" ").first; // Extracting first word
-
-                return ListTile(
-                  title: Text(appointment.subject,style: TextStyle(
-                      fontFamily: "Montserrat",
-                      fontStyle: FontStyle.normal,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 18,
-                      letterSpacing: 1)),
-                  subtitle: Text(
-                      'Start: ${DateFormat('dd MMM yy hh:mm a').format(appointment.startTime)}\nEnd: ${DateFormat('dd MMM yy hh:mm a').format(appointment.endTime)}',style: TextStyle(
-                  fontFamily: "Montserrat",
-                      fontStyle: FontStyle.normal,
-                      color: Colors.grey[800],
-                  fontWeight: FontWeight.w400,
-                  fontSize: 14,
-                      letterSpacing: 1)),
-                  leading: CircleAvatar(
-                    backgroundColor: appointment.color,
-                    child: Text(
-                      firstWord[0].toUpperCase(), // Display the first letter of the first word
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                  onTap: () => _onEventTap(appointment, index),
-                );
-              },
-            ),
-          ),*/
           SizedBox(
             height: 20,
           ),
