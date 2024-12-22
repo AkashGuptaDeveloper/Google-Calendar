@@ -1,4 +1,13 @@
-// ignore_for_file: file_names, non_constant_identifier_names, use_build_context_synchronously, deprecated_member_use, await_only_futures, unnecessary_null_comparison, unused_local_variable
+// Automatic FlutterFlow imports
+import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_util.dart';
+import '/custom_code/widgets/index.dart'; // Imports other custom widgets
+import '/flutter_flow/custom_functions.dart'; // Imports custom functions
+import 'package:flutter/material.dart';
+// Begin custom widget code
+// DO NOT REMOVE OR MODIFY THE CODE ABOVE!
+
+import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -7,59 +16,34 @@ import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
-
 //----------------------------------------------------------------------------//
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  HttpOverrides.global = MyHttpOverrides();
-  GestureBinding.instance.resamplingEnabled = true;
-  runApp(const MyApp());
-}
+class TodoWidget extends StatefulWidget {
+  const TodoWidget({
+    super.key,
+    this.width,
+    this.height,
+  });
 
-//----------------------------------------------------------------------------//
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-//----------------------------------------------------------------------------//
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'ToDo',
-      scrollBehavior: MyCustomScrollBehavior(),
-      theme: ThemeData(
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      debugShowCheckedModeBanner: false,
-      home: const MyHomePage(title: 'ToDo'),
-    );
-  }
-}
-
-//----------------------------------------------------------------------------//
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
+  final double? width;
+  final double? height;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<TodoWidget> createState() => _TodoWidgetState();
 }
-
 //----------------------------------------------------------------------------//
-class _MyHomePageState extends State<MyHomePage> {
+class _TodoWidgetState extends State<TodoWidget> {
   final List<Appointment> _appointments = <Appointment>[];
   late AppointmentDataSource _dataSource;
   int selectedIndex = 0; // 0 for Day, 1 for Month
 
   CalendarView calendarView = CalendarView.day;
   CalendarController calendarController = CalendarController();
-
 //----------------------------------------------------------------------------//
   @override
   void initState() {
     super.initState();
     _dataSource = AppointmentDataSource(_appointments);
   }
-
 //----------------------------------------------------------------------------//
   @override
   Widget build(BuildContext context) {
@@ -67,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         backgroundColor: const Color(0xFF3788D3),
         title: Text(
-          widget.title,
+          "Todo",
           style: TextStyle(
               fontFamily: "Montserrat",
               fontStyle: FontStyle.normal,
@@ -80,125 +64,6 @@ class _MyHomePageState extends State<MyHomePage> {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          /* Container(
-            padding: EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: Colors.white, // Background color
-              borderRadius: BorderRadius.circular(12), // Rounded container
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                // Day Button
-                InkWell(
-                  onTap: () {
-                    setState(() {
-                      selectedIndex = 0;
-                      calendarView = CalendarView.day;
-                      calendarController.view = calendarView;
-                    });
-                  },
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                    decoration: BoxDecoration(
-                      color: selectedIndex == 0
-                          ? Color(0xFF3788D3) // Highlight color when selected
-                          : Color(0xFF3788D3).withOpacity(0.8),
-                      borderRadius: BorderRadius.circular(10), // Rounded edges
-                      boxShadow: [
-                        if (selectedIndex == 0)
-                          BoxShadow(
-                            color: Colors.blue.withOpacity(0.5),
-                            blurRadius: 6,
-                            offset: Offset(0, 2),
-                          )
-                      ],
-                    ),
-                    child: Text(
-                      "Day",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "Montserrat",
-                          fontStyle: FontStyle.normal,
-                          fontSize: 15,
-                          letterSpacing: 1),
-                    ),
-                  ),
-                ),
-                // Week Button
-                InkWell(
-                  onTap: () {
-                    setState(() {
-                      selectedIndex = 1;
-                      calendarView = CalendarView.week;
-                      calendarController.view = calendarView;
-                    });
-                  },
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                    decoration: BoxDecoration(
-                      color: selectedIndex == 1
-                          ? Color(0xFF3788D3) // Highlight color when selected
-                          : Color(0xFF3788D3).withOpacity(0.8),
-                      borderRadius: BorderRadius.circular(10), // Rounded edges
-                      boxShadow: [
-                        if (selectedIndex == 1)
-                          BoxShadow(
-                            color: Colors.blue.withOpacity(0.5),
-                            blurRadius: 6,
-                            offset: Offset(0, 2),
-                          )
-                      ],
-                    ),
-                    child: Text("Week",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "Montserrat",
-                            fontStyle: FontStyle.normal,
-                            fontSize: 15,
-                            letterSpacing: 1)),
-                  ),
-                ),
-                // Month Button
-                InkWell(
-                  onTap: () {
-                    setState(() {
-                      selectedIndex = 2;
-                      calendarView = CalendarView.month;
-                      calendarController.view = calendarView;
-                    });
-                  },
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                    decoration: BoxDecoration(
-                      color: selectedIndex == 2
-                          ? Color(0xFF3788D3) // Highlight color when selected
-                          : Color(0xFF3788D3).withOpacity(0.8),
-                      borderRadius: BorderRadius.circular(10), // Rounded edges
-                      boxShadow: [
-                        if (selectedIndex == 3)
-                          BoxShadow(
-                            color: Colors.blue.withOpacity(0.5),
-                            blurRadius: 6,
-                            offset: Offset(0, 2),
-                          )
-                      ],
-                    ),
-                    child: Text("Month",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "Montserrat",
-                            fontStyle: FontStyle.normal,
-                            fontSize: 15,
-                            letterSpacing: 1)),
-                  ),
-                ),
-              ],
-            ),
-          ),*/
           // Calendar view (left half of screen)
           Expanded(
             child: SfCalendar(
@@ -276,7 +141,6 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-
 //----------------------------------------------------------------------------//
   void _onCalendarTap(CalendarTapDetails details) {
     setState(() {
@@ -494,7 +358,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                             fontFamily: "Montserrat",
                                             fontStyle: FontStyle.normal,
                                             color:
-                                                Colors.black.withOpacity(0.8),
+                                            Colors.black.withOpacity(0.8),
                                             fontWeight: FontWeight.w400,
                                             fontSize: 15,
                                             letterSpacing: 0.5,
@@ -573,30 +437,30 @@ class _MyHomePageState extends State<MyHomePage> {
                               Expanded(
                                 child: SizedBox(
                                     child: ElevatedButton(
-                                  onPressed: () async {
-                                    hideKeyboard(context);
-                                    Navigator.pop(context);
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor:
+                                      onPressed: () async {
+                                        hideKeyboard(context);
+                                        Navigator.pop(context);
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor:
                                         Colors.black.withOpacity(0.6),
-                                    // Customize button color
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(
-                                          10.0), // Adjust the value for rounded corners
-                                    ),
-                                  ),
-                                  child: Text(
-                                    "Cancel",
-                                    style: TextStyle(
-                                        fontFamily: "Montserrat",
-                                        fontStyle: FontStyle.normal,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 15,
-                                        letterSpacing: 1),
-                                  ),
-                                )),
+                                        // Customize button color
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                              10.0), // Adjust the value for rounded corners
+                                        ),
+                                      ),
+                                      child: Text(
+                                        "Cancel",
+                                        style: TextStyle(
+                                            fontFamily: "Montserrat",
+                                            fontStyle: FontStyle.normal,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 15,
+                                            letterSpacing: 1),
+                                      ),
+                                    )),
                               ),
                             ],
                           ),
@@ -637,9 +501,9 @@ class _MyHomePageState extends State<MyHomePage> {
 //----------------------------------------------------------------------------//
   void _showEventDetailsDialog(Appointment appointment) {
     TextEditingController eventController =
-        TextEditingController(text: appointment.subject);
+    TextEditingController(text: appointment.subject);
     TextEditingController descController =
-        TextEditingController(text: appointment.notes);
+    TextEditingController(text: appointment.notes);
     DateTime? startDate = appointment.startTime;
     DateTime? endDate = appointment.endTime;
     Color selectedColor = appointment.color; // Default color
@@ -929,62 +793,62 @@ class _MyHomePageState extends State<MyHomePage> {
                             Expanded(
                               child: SizedBox(
                                   child: ElevatedButton(
-                                onPressed: () async {
-                                  hideKeyboard(context);
-                                  setState(() {
-                                    _appointments.remove(appointment);
-                                    _updateCalendar();
-                                  });
-                                  Navigator.pop(context);
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor:
+                                    onPressed: () async {
+                                      hideKeyboard(context);
+                                      setState(() {
+                                        _appointments.remove(appointment);
+                                        _updateCalendar();
+                                      });
+                                      Navigator.pop(context);
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
                                       Colors.red, // Customize button color
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        10.0), // Adjust the value for rounded corners
-                                  ),
-                                ),
-                                child: Text(
-                                  "Delete",
-                                  style: TextStyle(
-                                      fontFamily: "Montserrat",
-                                      fontStyle: FontStyle.normal,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 15,
-                                      letterSpacing: 1),
-                                ),
-                              )),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            10.0), // Adjust the value for rounded corners
+                                      ),
+                                    ),
+                                    child: Text(
+                                      "Delete",
+                                      style: TextStyle(
+                                          fontFamily: "Montserrat",
+                                          fontStyle: FontStyle.normal,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 15,
+                                          letterSpacing: 1),
+                                    ),
+                                  )),
                             ),
                             SizedBox(width: 3),
                             Expanded(
                               child: SizedBox(
                                   child: ElevatedButton(
-                                onPressed: () async {
-                                  hideKeyboard(context);
-                                  Navigator.pop(context);
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor:
+                                    onPressed: () async {
+                                      hideKeyboard(context);
+                                      Navigator.pop(context);
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
                                       Colors.black.withOpacity(0.6),
-                                  // Customize button color
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        10.0), // Adjust the value for rounded corners
-                                  ),
-                                ),
-                                child: Text(
-                                  "Close",
-                                  style: TextStyle(
-                                      fontFamily: "Montserrat",
-                                      fontStyle: FontStyle.normal,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 15,
-                                      letterSpacing: 1),
-                                ),
-                              )),
+                                      // Customize button color
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            10.0), // Adjust the value for rounded corners
+                                      ),
+                                    ),
+                                    child: Text(
+                                      "Close",
+                                      style: TextStyle(
+                                          fontFamily: "Montserrat",
+                                          fontStyle: FontStyle.normal,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 15,
+                                          letterSpacing: 1),
+                                    ),
+                                  )),
                             ),
                           ],
                         ),
@@ -1018,27 +882,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-//----------------------------------------------------------------------------//
-class MyHttpOverrides extends HttpOverrides {
-  @override
-  HttpClient createHttpClient(SecurityContext? context) {
-    return super.createHttpClient(context)
-      ..badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
-  }
-}
-
-//----------------------------------------------------------------------------//
-class MyCustomScrollBehavior extends MaterialScrollBehavior {
-  @override
-  Set<PointerDeviceKind> get dragDevices => {
-        PointerDeviceKind.touch,
-        PointerDeviceKind.mouse,
-      };
-}
-
 class AppointmentDataSource extends CalendarDataSource {
-  AppointmentDataSource(List<Appointment> source) {
-    appointments = source;
+  AppointmentDataSource(List<Appointment> appointments) {
+    this.appointments = appointments;
   }
 }
